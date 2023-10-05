@@ -1,10 +1,11 @@
 #include <iostream>
 #include <string>
 #include "memory.cpp"
+#include "screen.cpp"
 
 class processor {
    public:
-      processor(memory& memory) : mem(memory){}
+      processor(memory& memory, screen& screen) : mem(memory), scr(screen){}
      
       void keyPressed(const std::string& label){
       
@@ -44,15 +45,13 @@ class processor {
       std::string currentNum;
       std::string currentOp;
       memory& mem;
+      screen& scr;
       void calculate(){
          if(!currentNum.empty() && !currentOp.empty()){
             double num = std::stod(currentNum);
             double result = mem.getMemory();
-            std::cout << std::endl;
-            std::cout << result << std::endl;
-            std::cout << currentOp << std::endl;
-            std::cout << currentNum << std::endl;
-            std::cout << "=" << std::endl;
+            scr.showOp(result, currentOp, num);
+            scr.showRes(result);
             if(currentOp == "+"){
                result += num;
             }else if(currentOp == "-"){
