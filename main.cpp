@@ -4,7 +4,8 @@
 
 int main(){
    memory mem;
-   processor p1(mem);
+   screen scr;
+   processor p1(mem,scr);
    keyboard kb(p1);
   
    kb.teste();
